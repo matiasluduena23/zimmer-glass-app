@@ -11,22 +11,24 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-import { Button } from '../ui/button';
-import { ArrowPathIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import type { Vidrio, Camara, Herramienta } from '@/app/lib/definitions';
-type DataTableProps = {
-	title: String;
-	data: Vidrio[] | Camara[] | Herramienta[];
+import {} from '@heroicons/react/24/outline';
+import type { Camara } from '@/app/lib/definitions';
+import DeleteDialog from '@/components/datos/DeleteDialog';
+import UpdateDialog from '@/components/datos/UpdateDialog';
+import CreateCamara from '@/components/datos/CreateCamara';
+import { Card, CardFooter, CardTitle } from '../ui/card';
+type CamaraTableProps = {
+	data: Camara[];
 };
 
-export default function DataTable({ title, data }: DataTableProps) {
+export default function CamaraTable({ data }: CamaraTableProps) {
 	return (
-		<section className="flex flex-col items-center gap-4">
-			<h2 className="text-center">{title}</h2>
+		<Card className="flex flex-col items-center gap-4 p-2">
+			<CardTitle>Camaras</CardTitle>
 
-			<ScrollArea className="h-72 w-[450px] rounded-md border">
+			<ScrollArea className="h-[450px] w-[450px] rounded-md border">
 				<Table>
-					<TableCaption>A list of your recent invoices.</TableCaption>
+					<TableCaption>Lista de Camaras</TableCaption>
 					<TableHeader>
 						<TableRow>
 							<TableHead className="w-[100px]">Tipo</TableHead>
@@ -49,21 +51,17 @@ export default function DataTable({ title, data }: DataTableProps) {
 								<TableCell>$ {data.precio}</TableCell>
 								<TableCell>{data.stock}</TableCell>
 								<TableCell className="text-right">
-									<Button>
-										<ArrowPathIcon className="h-6 w-6 text-foreground" />
-									</Button>
+									<UpdateDialog item={data} />
 								</TableCell>
 								<TableCell className="text-right">
-									<Button variant={'destructive'}>
-										<XCircleIcon className="h-6 w-6 text-foreground" />
-									</Button>
+									<DeleteDialog item={data} />
 								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>
 					<TableFooter>
 						<TableRow>
-							<TableCell colSpan={4}>Total</TableCell>
+							<TableCell colSpan={4}>algun calculo</TableCell>
 							<TableCell className="text-right">
 								$2,500.00
 							</TableCell>
@@ -71,6 +69,9 @@ export default function DataTable({ title, data }: DataTableProps) {
 					</TableFooter>
 				</Table>
 			</ScrollArea>
-		</section>
+			<CardFooter>
+				<CreateCamara />
+			</CardFooter>
+		</Card>
 	);
 }
