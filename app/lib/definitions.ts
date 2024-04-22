@@ -18,3 +18,16 @@ export type Herramienta = {
 	precio: number;
 	stock: number;
 };
+
+export type Cliente = {
+	id: string;
+	nombre: string;
+	empresa?: string;
+	telefono: number;
+	direccion: string;
+	correo?: string;
+	dni?: number;
+	cuit?: number;
+	saldo: number;
+	detalle?: string;
+};

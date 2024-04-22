@@ -4,6 +4,7 @@ import {
 	CircleStackIcon,
 	HomeIcon,
 	DocumentDuplicateIcon,
+	UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -20,6 +21,7 @@ const links = [
 		icon: DocumentDuplicateIcon,
 	},
 	{ name: 'Datos', href: '/panel/datos', icon: CircleStackIcon },
+	{ name: 'Clientes', href: '/panel/clientes', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
