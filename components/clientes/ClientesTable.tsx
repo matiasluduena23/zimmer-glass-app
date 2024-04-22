@@ -103,7 +103,7 @@ export default function ClientesTable({ data }: ClientesTableProps) {
 				<TableFooter>
 					<TableRow>
 						<TableCell colSpan={7}>Total deuda clientes</TableCell>
-						<TableCell className="text-right">$2,500.00</TableCell>
+						<TableCell>$2,500.00</TableCell>
 					</TableRow>
 				</TableFooter>
 			</Table>
