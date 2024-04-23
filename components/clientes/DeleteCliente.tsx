@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog';
 import { XCircleIcon } from '@heroicons/react/24/outline';
-import type { Cliente } from '@/app/lib/definitions';
+import type { Cliente } from '@/lib/definitions';
 type DeleteClienteProps = {
 	data: Cliente;
 };

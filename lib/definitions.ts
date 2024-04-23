@@ -1,40 +1,28 @@
 import { z } from 'zod';
 
-export type Vidrio = {
-	id: string;
-	tipo: string;
-	precio: number;
-	stock: number;
-};
-
-export type Camara = {
-	id: string;
-	tipo: string;
-	precio: number;
-	stock: number;
-};
-
-export type Herramienta = {
-	id: string;
-	tipo: string;
-	precio: number;
-	stock: number;
-};
-
-export type Cliente = {
-	id: string;
-	nombre: string;
-	empresa?: string;
-	telefono: number;
-	direccion: string;
-	correo?: string;
-	dni?: number;
-	cuit?: number;
-	saldo: number;
-	detalle?: string;
-};
+export const DatoSchema = z.object({
+	id: z.string().optional(),
+	tipo: z
+		.string({
+			required_error: 'Debe ingresar un tipo',
+		})
+		.min(3, { message: 'Debe ingresar un tipo' }),
+	precio: z.coerce
+		.number({
+			required_error: 'Debe ingresar un precio',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.positive({ message: 'Debe ingresar un precio' }),
+	stock: z.coerce
+		.number({
+			required_error: 'Debe ingresar un stock',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.positive({ message: 'Debe ingresar un stock' }),
+});
 
 export const ClienteSchema = z.object({
+	id: z.string().optional(),
 	nombre: z
 		.string({
 			required_error: 'Debe ingresar un nombre',
@@ -73,3 +61,6 @@ export const ClienteSchema = z.object({
 		.optional(),
 	detalle: z.string().optional(),
 });
+
+export type Cliente = z.infer<typeof ClienteSchema>;
+export type Dato = z.infer<typeof DatoSchema>;

@@ -11,25 +11,24 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-
 import {} from '@heroicons/react/24/outline';
-import type { Vidrio } from '@/app/lib/definitions';
+import type { Dato } from '@/lib/definitions';
 import DeleteDialog from '@/components/datos/DeleteDialog';
-import UpdateDialog from '@/components/datos/UpdateDialog';
-import CreateHerramienta from '@/components/datos/CreateHerramienta';
+import CreateUpdateDato from '@/components/datos/CreateUpdateDato';
 import { Card, CardFooter, CardTitle } from '../ui/card';
-type VidrioTableProps = {
-	data: Vidrio[];
+type DatoTableProps = {
+	data: Dato[];
+	tipo: string;
 };
 
-export default function VidrioTable({ data }: VidrioTableProps) {
+export default function DatoTable({ data, tipo }: DatoTableProps) {
 	return (
 		<Card className="flex flex-col items-center gap-4 p-2">
-			<CardTitle>Vidrios</CardTitle>
+			<CardTitle>{tipo}</CardTitle>
 
 			<ScrollArea className="h-[450px] w-[450px] rounded-md border">
 				<Table>
-					<TableCaption>Lista de Herramientas.</TableCaption>
+					<TableCaption>Lista de {tipo}s</TableCaption>
 					<TableHeader>
 						<TableRow>
 							<TableHead className="w-[100px]">Tipo</TableHead>
@@ -52,17 +51,17 @@ export default function VidrioTable({ data }: VidrioTableProps) {
 								<TableCell>$ {data.precio}</TableCell>
 								<TableCell>{data.stock}</TableCell>
 								<TableCell className="text-right">
-									<UpdateDialog item={data} />
+									<CreateUpdateDato dato={data} tipo={tipo} />
 								</TableCell>
 								<TableCell className="text-right">
-									<DeleteDialog item={data} />
+									<DeleteDialog item={data} tipo={tipo} />
 								</TableCell>
 							</TableRow>
 						))}
 					</TableBody>
 					<TableFooter>
 						<TableRow>
-							<TableCell colSpan={4}>calculo</TableCell>
+							<TableCell colSpan={4}>algun calculo</TableCell>
 							<TableCell className="text-right">
 								$2,500.00
 							</TableCell>
@@ -71,7 +70,7 @@ export default function VidrioTable({ data }: VidrioTableProps) {
 				</Table>
 			</ScrollArea>
 			<CardFooter>
-				<CreateHerramienta />
+				<CreateUpdateDato buttonText="Nuevo" tipo={tipo} />
 			</CardFooter>
 		</Card>
 	);

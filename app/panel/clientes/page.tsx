@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Cliente } from '@/app/lib/definitions';
+import type { Cliente } from '@/lib/definitions';
 import CreateUpdateCliente from '@/components/clientes/CreateUpdateCliente';
 
 import ClientesTable from '@/components/clientes/ClientesTable';

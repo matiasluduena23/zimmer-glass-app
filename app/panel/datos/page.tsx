@@ -1,23 +1,21 @@
 import React from 'react';
-
-import VidrioTable from '@/components/datos/VidrioTable';
-import CamaraTable from '@/components/datos/CamaraTable';
-import HerramientaTable from '@/components/datos/HerramientaTable';
-import type { Vidrio, Camara, Herramienta } from '@/app/lib/definitions';
+import DatoTable from '@/components/datos/DatoTable';
+import type { Dato } from '@/lib/definitions';
+import { DATO_TYPES } from '@/lib/constants';
 
 export default function page() {
 	return (
 		<div>
 			<div className="flex items-center justify-center space-x-4 h-screen">
-				<VidrioTable data={vidrios} />
-				<CamaraTable data={camaras} />
-				<HerramientaTable data={herramientas} />
+				<DatoTable data={camaras} tipo={DATO_TYPES.CAMARA} />
+				<DatoTable data={vidrios} tipo={DATO_TYPES.VIDRIO} />
+				<DatoTable data={herramientas} tipo={DATO_TYPES.HERRAMIENTA} />
 			</div>
 		</div>
 	);
 }
 
-const vidrios: Vidrio[] = [
+const vidrios: Dato[] = [
 	{
 		id: 'INV001',
 		tipo: 'Vidrio 1',
@@ -62,7 +60,7 @@ const vidrios: Vidrio[] = [
 	},
 ];
 
-const camaras: Camara[] = [
+const camaras: Dato[] = [
 	{
 		id: 'INV001',
 		tipo: 'Camara 1',
@@ -107,7 +105,7 @@ const camaras: Camara[] = [
 	},
 ];
 
-const herramientas: Herramienta[] = [
+const herramientas: Dato[] = [
 	{
 		id: 'INV001',
 		tipo: 'herramienta 1',

@@ -20,11 +20,12 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { PlusIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
-import { ClienteSchema } from '@/app/lib/definitions';
+import { ClienteSchema } from '@/lib/definitions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import type { Cliente } from '@/app/lib/definitions';
+import type { Cliente } from '@/lib/definitions';
+import { CLIENTE_DEFAULT_VALUES } from '@/lib/constants';
 
 type UpdateClienteProps = {
 	data?: Cliente;
@@ -35,10 +36,23 @@ export default function CreateUpdateCliente({
 	data,
 	buttonText,
 }: UpdateClienteProps) {
-	console.log(data);
+	const defaultValue = data
+		? {
+				nombre: data.nombre,
+				telefono: data.telefono,
+				direccion: data.direccion,
+				empresa: data.empresa,
+				correo: data.correo,
+				dni: data.dni,
+				cuit: data.cuit,
+				saldo: data.saldo,
+				detalle: data.detalle,
+		  }
+		: CLIENTE_DEFAULT_VALUES;
+
 	const form = useForm<z.infer<typeof ClienteSchema>>({
 		resolver: zodResolver(ClienteSchema),
-		defaultValues: {},
+		defaultValues: defaultValue,
 	});
 
 	function onSubmit(values: z.infer<typeof ClienteSchema>) {
@@ -87,11 +101,6 @@ export default function CreateUpdateCliente({
 												<Input
 													placeholder="Nombre completo"
 													{...field}
-													defaultValue={
-														data?.nombre
-															? data.nombre
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -109,11 +118,6 @@ export default function CreateUpdateCliente({
 												<Input
 													placeholder="Nombre empresa"
 													{...field}
-													defaultValue={
-														data?.empresa
-															? data.empresa
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -132,11 +136,6 @@ export default function CreateUpdateCliente({
 													type="number"
 													placeholder="3512322334"
 													{...field}
-													defaultValue={
-														data?.telefono
-															? data.telefono
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -156,11 +155,6 @@ export default function CreateUpdateCliente({
 												<Input
 													placeholder="F. alcorta 285 Cba."
 													{...field}
-													defaultValue={
-														data?.direccion
-															? data.direccion
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -178,11 +172,6 @@ export default function CreateUpdateCliente({
 												<Input
 													placeholder="matias@gmail.com"
 													{...field}
-													defaultValue={
-														data?.correo
-															? data.correo
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -201,11 +190,6 @@ export default function CreateUpdateCliente({
 													type="number"
 													placeholder="31788344"
 													{...field}
-													defaultValue={
-														data?.dni
-															? data.dni
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -226,11 +210,6 @@ export default function CreateUpdateCliente({
 													type="number"
 													placeholder="3334223339098"
 													{...field}
-													defaultValue={
-														data?.cuit
-															? data.cuit
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -249,11 +228,6 @@ export default function CreateUpdateCliente({
 													type="number"
 													placeholder="1200"
 													{...field}
-													defaultValue={
-														data?.saldo
-															? data.saldo
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -271,11 +245,6 @@ export default function CreateUpdateCliente({
 												<Input
 													placeholder="Cliente mayorista..."
 													{...field}
-													defaultValue={
-														data?.detalle
-															? data.detalle
-															: ''
-													}
 												/>
 											</FormControl>
 
@@ -286,7 +255,7 @@ export default function CreateUpdateCliente({
 							</div>
 						</div>
 						<Button type="submit" className="mt-4">
-							Crear
+							{buttonText ? 'Crear' : 'Modificar'}
 						</Button>
 					</form>
 				</Form>

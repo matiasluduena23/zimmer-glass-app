@@ -18,7 +18,7 @@ import {
 	ChatBubbleLeftEllipsisIcon,
 	AtSymbolIcon,
 } from '@heroicons/react/24/outline';
-import type { Cliente } from '@/app/lib/definitions';
+import type { Cliente } from '@/lib/definitions';
 import { Button } from '../ui/button';
 import DeleteCliente from './DeleteCliente';
 import CreateUpdateCliente from './CreateUpdateCliente';
