@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Cliente } from '@/app/lib/definitions';
-import CreateCliente from '@/components/clientes/CreateCliente';
+import CreateUpdateCliente from '@/components/clientes/CreateUpdateCliente';
 
 import ClientesTable from '@/components/clientes/ClientesTable';
 import { Card, CardFooter, CardHeader } from '@/components/ui/card';
@@ -15,8 +15,8 @@ export default function page() {
 					</h2>
 				</CardHeader>
 				<ClientesTable data={clientes} />
-				<CardFooter>
-					<CreateCliente />
+				<CardFooter className="mt-4">
+					<CreateUpdateCliente buttonText="Nuevo" />
 				</CardFooter>
 			</Card>
 		</section>
@@ -33,7 +33,7 @@ const clientes: Cliente[] = [
 		correo: 'pepito@gmail.com',
 		dni: 31783685,
 		cuit: 533988768882,
-		saldo: 0,
+		saldo: 100000,
 		detalle: '',
 	},
 	{
@@ -45,7 +45,7 @@ const clientes: Cliente[] = [
 		correo: 'toma@gmail.com',
 		dni: 31783685,
 		cuit: 533988768882,
-		saldo: 0,
+		saldo: 30000,
 		detalle: 'algun detalle del cliente',
 	},
 ];

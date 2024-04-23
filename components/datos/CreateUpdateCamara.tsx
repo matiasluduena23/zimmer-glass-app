@@ -10,19 +10,29 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { PlusIcon } from '@heroicons/react/24/outline';
-import type { Vidrio, Camara, Herramienta } from '@/app/lib/definitions';
-type CreateDialogProps = {
-	item: Vidrio | Camara | Herramienta;
+import { PlusIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import type { Camara } from '@/app/lib/definitions';
+type CreateUpdateProps = {
+	camara?: Camara;
+	buttonText?: string;
 };
 
-export default function CreateCamara() {
+export default function CreateUpdateCamara({
+	camara,
+	buttonText,
+}: CreateUpdateProps) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button className="flex items-center gap-2">
-					<p className="text-foreground text-base">Nuevo </p>
-					<PlusIcon className="h-6 w-6 text-foreground" />
+					{buttonText ? (
+						<>
+							<p className="text-foreground text-base">Nuevo </p>
+							<PlusIcon className="h-6 w-6 text-foreground" />
+						</>
+					) : (
+						<ArrowPathIcon className="h-6 w-6 text-foreground" />
+					)}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">

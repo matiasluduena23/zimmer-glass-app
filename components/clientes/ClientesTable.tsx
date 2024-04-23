@@ -20,8 +20,8 @@ import {
 } from '@heroicons/react/24/outline';
 import type { Cliente } from '@/app/lib/definitions';
 import { Button } from '../ui/button';
-import UpdateCliente from './UpdateCliente';
 import DeleteCliente from './DeleteCliente';
+import CreateUpdateCliente from './CreateUpdateCliente';
 
 type ClientesTableProps = {
 	data: Cliente[];
@@ -92,7 +92,7 @@ export default function ClientesTable({ data }: ClientesTableProps) {
 								)}
 							</TableCell>
 							<TableCell className="text-right">
-								<UpdateCliente data={cliente} />
+								<CreateUpdateCliente data={cliente} />
 							</TableCell>
 							<TableCell className="text-right">
 								<DeleteCliente data={cliente} />

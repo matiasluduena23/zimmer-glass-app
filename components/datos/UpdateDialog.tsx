@@ -20,9 +20,7 @@ export default function UpdateDialog({ item }: UpdateDialogProps) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button>
-					<ArrowPathIcon className="h-6 w-6 text-foreground" />
-				</Button>
+				<Button></Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>

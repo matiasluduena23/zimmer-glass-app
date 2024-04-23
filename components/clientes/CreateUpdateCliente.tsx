@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
 	Dialog,
 	DialogContent,
@@ -15,48 +14,60 @@ import {
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import { ClienteSchema } from '@/app/lib/definitions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-
 import { z } from 'zod';
+import type { Cliente } from '@/app/lib/definitions';
 
-export default function CreateCliente() {
+type UpdateClienteProps = {
+	data?: Cliente;
+	buttonText?: string;
+};
+
+export default function CreateUpdateCliente({
+	data,
+	buttonText,
+}: UpdateClienteProps) {
+	console.log(data);
 	const form = useForm<z.infer<typeof ClienteSchema>>({
 		resolver: zodResolver(ClienteSchema),
-		defaultValues: {
-			nombre: '',
-			empresa: '',
-			direccion: '',
-			correo: '',
-			detalle: '',
-		},
+		defaultValues: {},
 	});
 
 	function onSubmit(values: z.infer<typeof ClienteSchema>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-		console.log(values);
+		if (data?.id) {
+			console.log('update');
+		} else {
+			console.log('create');
+		}
 	}
 
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button className="flex items-center gap-2">
-					<p className="text-foreground text-base">Nuevo </p>
-					<PlusIcon className="h-6 w-6 text-foreground" />
+					{buttonText ? (
+						<>
+							<p className="text-foreground text-base">Nuevo </p>
+							<PlusIcon className="h-6 w-6 text-foreground" />
+						</>
+					) : (
+						<ArrowPathIcon className="h-6 w-6 text-foreground" />
+					)}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="min-w-[850px] ">
 				<DialogHeader>
-					<DialogTitle>Crear Nuevo Cliente</DialogTitle>
+					<DialogTitle>
+						{buttonText ? 'Crear Cliente' : 'Modificar Cliente'}
+					</DialogTitle>
 					<DialogDescription>
 						Complete el formulario
 					</DialogDescription>
@@ -76,6 +87,11 @@ export default function CreateCliente() {
 												<Input
 													placeholder="Nombre completo"
 													{...field}
+													defaultValue={
+														data?.nombre
+															? data.nombre
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -93,6 +109,11 @@ export default function CreateCliente() {
 												<Input
 													placeholder="Nombre empresa"
 													{...field}
+													defaultValue={
+														data?.empresa
+															? data.empresa
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -111,6 +132,11 @@ export default function CreateCliente() {
 													type="number"
 													placeholder="3512322334"
 													{...field}
+													defaultValue={
+														data?.telefono
+															? data.telefono
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -130,6 +156,11 @@ export default function CreateCliente() {
 												<Input
 													placeholder="F. alcorta 285 Cba."
 													{...field}
+													defaultValue={
+														data?.direccion
+															? data.direccion
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -147,6 +178,11 @@ export default function CreateCliente() {
 												<Input
 													placeholder="matias@gmail.com"
 													{...field}
+													defaultValue={
+														data?.correo
+															? data.correo
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -165,6 +201,11 @@ export default function CreateCliente() {
 													type="number"
 													placeholder="31788344"
 													{...field}
+													defaultValue={
+														data?.dni
+															? data.dni
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -185,6 +226,11 @@ export default function CreateCliente() {
 													type="number"
 													placeholder="3334223339098"
 													{...field}
+													defaultValue={
+														data?.cuit
+															? data.cuit
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -203,6 +249,11 @@ export default function CreateCliente() {
 													type="number"
 													placeholder="1200"
 													{...field}
+													defaultValue={
+														data?.saldo
+															? data.saldo
+															: ''
+													}
 												/>
 											</FormControl>
 
@@ -220,6 +271,11 @@ export default function CreateCliente() {
 												<Input
 													placeholder="Cliente mayorista..."
 													{...field}
+													defaultValue={
+														data?.detalle
+															? data.detalle
+															: ''
+													}
 												/>
 											</FormControl>
 

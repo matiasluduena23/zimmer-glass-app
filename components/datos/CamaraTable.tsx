@@ -15,7 +15,7 @@ import {} from '@heroicons/react/24/outline';
 import type { Camara } from '@/app/lib/definitions';
 import DeleteDialog from '@/components/datos/DeleteDialog';
 import UpdateDialog from '@/components/datos/UpdateDialog';
-import CreateCamara from '@/components/datos/CreateCamara';
+import CreateCamara from '@/components/datos/CreateUpdateCamara';
 import { Card, CardFooter, CardTitle } from '../ui/card';
 type CamaraTableProps = {
 	data: Camara[];
