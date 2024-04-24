@@ -1,5 +1,10 @@
 import React from 'react';
+import CreatePresupuesto from '@/components/presupuestos/CreatePresupuesto';
 
 export default function page() {
-	return <div>presupuestos</div>;
+	return (
+		<div>
+			<CreatePresupuesto />
+		</div>
+	);
 }

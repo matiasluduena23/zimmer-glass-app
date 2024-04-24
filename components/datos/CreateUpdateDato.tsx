@@ -23,7 +23,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { PlusIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { Dato, DatoSchema } from '@/lib/definitions';
 import { DATO_DEFAULT_VALUES } from '@/lib/constants';
 type CreateUpdateProps = {
@@ -88,7 +88,7 @@ export default function CreateUpdateDato({
 							<PlusIcon className="h-6 w-6 text-foreground" />
 						</>
 					) : (
-						<ArrowPathIcon className="h-6 w-6 text-foreground" />
+						<PencilIcon className="h-6 w-6 text-foreground" />
 					)}
 				</Button>
 			</DialogTrigger>

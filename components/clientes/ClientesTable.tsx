@@ -43,8 +43,8 @@ export default function ClientesTable({ data }: ClientesTableProps) {
 						<TableHead>CUIT</TableHead>
 						<TableHead>Saldo </TableHead>
 						<TableHead>Detalle</TableHead>
-						<TableHead className="text-right">Modificar</TableHead>
-						<TableHead className="text-right">Eliminar</TableHead>
+						<TableHead>Modificar</TableHead>
+						<TableHead>Eliminar</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -91,10 +91,10 @@ export default function ClientesTable({ data }: ClientesTableProps) {
 									</HoverCard>
 								)}
 							</TableCell>
-							<TableCell className="text-right">
+							<TableCell>
 								<CreateUpdateCliente data={cliente} />
 							</TableCell>
-							<TableCell className="text-right">
+							<TableCell>
 								<DeleteCliente data={cliente} />
 							</TableCell>
 						</TableRow>

@@ -19,7 +19,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
-import { PlusIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, PencilIcon } from '@heroicons/react/24/outline';
 import { ClienteSchema } from '@/lib/definitions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -73,7 +73,7 @@ export default function CreateUpdateCliente({
 							<PlusIcon className="h-6 w-6 text-foreground" />
 						</>
 					) : (
-						<ArrowPathIcon className="h-6 w-6 text-foreground" />
+						<PencilIcon className="h-6 w-6 text-foreground items-end" />
 					)}
 				</Button>
 			</DialogTrigger>

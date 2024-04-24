@@ -62,5 +62,58 @@ export const ClienteSchema = z.object({
 	detalle: z.string().optional(),
 });
 
+export const PresupuestoSchema = z.object({
+	id: z.string().optional(),
+	clienteID: z
+		.string({
+			required_error: 'Debe ingresar un nombre',
+		})
+		.min(5, { message: 'Debe ingresar un nombre' }),
+	empresa: z.string().optional(),
+	telefono: z.coerce
+		.number({
+			required_error: 'Debe ingresar un telefono',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.positive({ message: 'Debe ingresar un telefono' }),
+	total: z.coerce
+		.number({
+			required_error: 'Debe ingresar un saldo',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.optional(),
+	detalle: z.string().optional(),
+});
+
+export const ProductoSchema = z.object({
+	id: z.string().optional(),
+	vidrio1ID: z
+		.string({
+			required_error: 'Debe ingresar un nombre',
+		})
+		.min(5, { message: 'Debe ingresar un vidrio' }),
+	camaraID: z.string().optional(),
+	vidrio2ID: z.string().optional(),
+	cantidad: z.coerce
+		.number({
+			required_error: 'Debe ingresar una cantidad',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.positive({ message: 'Debe ingresar una cantidad' }),
+	alto: z.coerce
+		.number({
+			required_error: 'Debe ingresar una medida',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.positive({ message: 'Debe ingresar una medida' }),
+	ancho: z.coerce
+		.number({
+			required_error: 'Debe ingresar una medida',
+			invalid_type_error: 'Ingrese solo numeros',
+		})
+		.positive({ message: 'Debe ingresar una medida' }),
+});
+
+export type Producto = z.infer<typeof ProductoSchema>;
 export type Cliente = z.infer<typeof ClienteSchema>;
 export type Dato = z.infer<typeof DatoSchema>;

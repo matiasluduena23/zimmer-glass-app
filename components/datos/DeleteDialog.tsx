@@ -8,7 +8,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { XCircleIcon } from '@heroicons/react/24/outline';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import type { Dato } from '@/lib/definitions';
 type DeleteDialogProps = {
 	item: Dato;
@@ -20,7 +20,7 @@ export default function DeleteDialog({ item, tipo }: DeleteDialogProps) {
 		<Dialog>
 			<DialogTrigger asChild>
 				<Button variant={'destructive'}>
-					<XCircleIcon className="h-6 w-6 text-foreground" />
+					<TrashIcon className="h-6 w-6 text-foreground" />
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
