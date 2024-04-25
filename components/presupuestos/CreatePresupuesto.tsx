@@ -1,19 +1,20 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import FormPresupuesto from './FormPresupuesto';
-import ProductTable from '@/components/presupuestos/ProductTable';
 import {
 	Dialog,
 	DialogContent,
-	DialogDescription,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
+import { useState } from 'react';
+import { Producto } from '@/lib/definitions';
+import FormPresupuesto from './FormPresupuesto';
 
 export default function CreatePresupuesto() {
+	const [products, setProducts] = useState<Producto[]>([]);
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -22,13 +23,13 @@ export default function CreatePresupuesto() {
 			<DialogContent className="min-w-[900px] ">
 				<DialogHeader>
 					<DialogTitle>Presupuesto</DialogTitle>
-					<DialogDescription>
-						Complete todos los campos
-					</DialogDescription>
 				</DialogHeader>
-				<FormPresupuesto />
-				<ProductTable />
+				<FormPresupuesto
+					setProducts={setProducts}
+					products={products}
+				/>
 			</DialogContent>
+			<DialogFooter></DialogFooter>
 		</Dialog>
 	);
 }

@@ -69,20 +69,12 @@ export const PresupuestoSchema = z.object({
 			required_error: 'Debe ingresar un nombre',
 		})
 		.min(5, { message: 'Debe ingresar un nombre' }),
-	empresa: z.string().optional(),
-	telefono: z.coerce
-		.number({
-			required_error: 'Debe ingresar un telefono',
-			invalid_type_error: 'Ingrese solo numeros',
-		})
-		.positive({ message: 'Debe ingresar un telefono' }),
-	total: z.coerce
-		.number({
-			required_error: 'Debe ingresar un saldo',
-			invalid_type_error: 'Ingrese solo numeros',
-		})
-		.optional(),
-	detalle: z.string().optional(),
+	productos: z.array(z.object({})),
+	total: z.coerce.number({
+		required_error: 'Debe ingresar un saldo',
+		invalid_type_error: 'Ingrese solo numeros',
+	}),
+	observaciones: z.string().optional(),
 });
 
 export const ProductoSchema = z.object({
@@ -112,6 +104,7 @@ export const ProductoSchema = z.object({
 			invalid_type_error: 'Ingrese solo numeros',
 		})
 		.positive({ message: 'Debe ingresar una medida' }),
+	pulido: z.enum(['full', 'medio', 'no']),
 });
 
 export type Producto = z.infer<typeof ProductoSchema>;

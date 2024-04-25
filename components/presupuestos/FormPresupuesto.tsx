@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useMemo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -16,196 +16,106 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { vidrios, camaras, herramientas } from '@/data/data';
+import FormProducto from './FormProducto';
+import ProductTable from '@/components/presupuestos/ProductTable';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { ProductoSchema } from '@/lib/definitions';
+import { ProductoSchema, Producto } from '@/lib/definitions';
+import { clientes } from '@/data/data';
+import { Textarea } from '@/components/ui/textarea';
+type FormPresupuestoProps = {
+	setProducts: Dispatch<SetStateAction<Producto[]>>;
+	products: Producto[];
+};
 
-export default function FormPresupuesto() {
+export default function FormPresupuesto({
+	products,
+	setProducts,
+}: FormPresupuestoProps) {
+	const defaultValues = {
+		id: '',
+		clienteID: '',
+		productos: [],
+		total: 0,
+		observaciones: '',
+	};
+
 	const form = useForm<z.infer<typeof ProductoSchema>>({
 		resolver: zodResolver(ProductoSchema),
-		defaultValues: {},
+		defaultValues: defaultValues,
 	});
 
 	function onSubmit(values: z.infer<typeof ProductoSchema>) {
+		values.id = uuidv4();
 		console.log(values);
 	}
-	const vidrios2 = [
-		{
-			id: 'INV001',
-			tipo: 'Vidrio 1',
-			precio: 250.0,
-			stock: 200,
-		},
-		{
-			id: 'INV002',
-			tipo: 'Vidrio 2',
-			precio: 250.0,
-			stock: 200,
-		},
-		{
-			id: 'INV002',
-			tipo: 'Vidrio 3',
-			precio: 250.0,
-			stock: 200,
-		},
-	];
-	console.log(vidrios);
 
 	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-				<div className="grid grid-cols-3 gap-8  ">
-					<FormField
-						control={form.control}
-						name="vidrio1ID"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Vidrio</FormLabel>
-								<Select
-									onValueChange={field.onChange}
-									// defaultValue={field.value}
-								>
+		<>
+			<FormProducto setProducts={setProducts} />
+			<ProductTable setProducts={setProducts} products={products} />
+			<Form {...form}>
+				<form
+					onSubmit={form.handleSubmit(onSubmit)}
+					className="space-y-8"
+				>
+					<div className="grid grid-cols-3 gap-8  ">
+						<FormField
+							control={form.control}
+							name="vidrio1ID"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Cliente</FormLabel>
+									<Select
+										onValueChange={field.onChange}
+										defaultValue={field.value}
+									>
+										<FormControl>
+											<SelectTrigger>
+												<SelectValue placeholder="Seleccione un Cliente" />
+											</SelectTrigger>
+										</FormControl>
+										<SelectContent>
+											{clientes
+												? clientes.map((cliente) => (
+														<SelectItem
+															key={cliente.id}
+															value={cliente.id}
+														>
+															{cliente.nombre}
+														</SelectItem>
+												  ))
+												: null}
+										</SelectContent>
+									</Select>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="ancho"
+							render={({ field }) => (
+								<FormItem className="relative">
+									<FormLabel>Observaciones</FormLabel>
 									<FormControl>
-										<SelectTrigger>
-											<SelectValue placeholder="Seleccione un Vidrio" />
-										</SelectTrigger>
+										<Textarea
+											placeholder="Observaciones del presupuesto.."
+											className="resize-none"
+											{...field}
+										/>
 									</FormControl>
-									<SelectContent>
-										{vidrios
-											? vidrios.map((camara) => (
-													<SelectItem
-														key={camara.id}
-														value={camara.tipo}
-													>
-														{camara.tipo}
-													</SelectItem>
-											  ))
-											: null}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="camaraID"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Camara</FormLabel>
-								<Select
-									onValueChange={field.onChange}
-									defaultValue={field.value}
-								>
-									<FormControl>
-										<SelectTrigger>
-											<SelectValue placeholder="Select a verified email to display" />
-										</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										<SelectItem value="0">-</SelectItem>
-										{camaras
-											? camaras.map((camara) => (
-													<SelectItem
-														key={camara.id}
-														value={camara.tipo}
-													>
-														{camara.tipo}
-													</SelectItem>
-											  ))
-											: null}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="vidrio2ID"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Vidrio 2 DVH</FormLabel>
-								<Select
-									onValueChange={field.onChange}
-									defaultValue={field.value}
-								>
-									<FormControl>
-										<SelectTrigger>
-											<SelectValue placeholder="Select a verified email to display" />
-										</SelectTrigger>
-									</FormControl>
-									<SelectContent>
-										{vidrios
-											? vidrios.map((camara) => (
-													<SelectItem
-														key={camara.id}
-														value={camara.tipo}
-													>
-														{camara.tipo}
-													</SelectItem>
-											  ))
-											: null}
-									</SelectContent>
-								</Select>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="cantidad"
-						render={({ field }) => (
-							<FormItem className="relative">
-								<FormLabel>Cantidad</FormLabel>
-								<FormControl>
-									<Input placeholder="000" {...field} />
-								</FormControl>
-								<FormMessage className="absolute -bottom-5 left-0" />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="alto"
-						render={({ field }) => (
-							<FormItem className="relative">
-								<FormLabel>Alto</FormLabel>
-								<FormControl>
-									<Input
-										type="number"
-										placeholder="000"
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage className="absolute -bottom-5 left-0" />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="ancho"
-						render={({ field }) => (
-							<FormItem className="relative">
-								<FormLabel>Ancho</FormLabel>
-								<FormControl>
-									<Input
-										type="number"
-										placeholder="000"
-										{...field}
-									/>
-								</FormControl>
-								<FormMessage className="absolute -bottom-5 left-0" />
-							</FormItem>
-						)}
-					/>
-				</div>
-
-				<Button type="submit">Agregar</Button>
-			</form>
-		</Form>
+									<FormMessage className="absolute -bottom-5 left-0" />
+								</FormItem>
+							)}
+						/>
+						<Button type="submit" className="self-end">
+							Cargar presupuesto
+						</Button>
+					</div>
+				</form>
+			</Form>
+		</>
 	);
 }
