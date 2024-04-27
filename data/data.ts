@@ -159,3 +159,77 @@ export const clientesData = [
 		detalle: 'algun detalle del cliente',
 	},
 ];
+
+export const presupuestoData = [
+	{
+		id: '1',
+		fecha: new Date('05/07/2024'),
+		clienteID: 'PepitoID',
+		productos: {
+			vidrio: [
+				{
+					vidrioID: 'vidrio 1',
+					camaraID: 'camara 1',
+					vidrio2ID: ' vidrio 2',
+					cantidad: 2,
+					alto: 500,
+					ancho: 150,
+					pulido: '80',
+				},
+			],
+		},
+		// {
+		// 	herramientas: [
+		// 		{
+		// 			id: '1',
+		// 			herramienta: 'pinza',
+		// 			cantidad: 3,
+		// 		},
+		// 		{
+		// 			id: '2',
+		// 			herramienta: 'destornillador',
+		// 			cantidad: 1,
+		// 		},
+		// 	],
+		// },
+
+		total: 500000,
+		observaciones: 'algunas observaciones ',
+		estado: 'pendiente de pago',
+	},
+	// {
+	// 	id: '2',
+	// 	fecha: new Date('01/11/2024'),
+	// 	clienteID: 'Juan Boliche',
+	// 	productos: [
+	// 		{
+	// 			vidrio: [
+	// 				{
+	// 					vidrio: 'vidrio 1',
+	// 					camara: 'camara 1',
+	// 					vidrioDvh: ' vidrio 2',
+	// 					cantidad: 2,
+	// 					alto: 500,
+	// 					ancho: 150,
+	// 					total: 40000,
+	// 				},
+	// 				{
+	// 					vidrio: 'vidrio 1',
+	// 					camara: 'camara 1',
+	// 					vidrioDvh: ' vidrio 2',
+	// 					cantidad: 2,
+	// 					alto: 500,
+	// 					ancho: 150,
+	// 					total: 40000,
+	// 				},
+	// 			],
+	// 		},
+	// 		{
+	// 			herramientas: [],
+	// 		},
+	// 	],
+	// 	total: 500000,
+	// 	observaciones: 'algunas observaciones ',
+	// 	estado: 'En proceso',
+	// },
+];

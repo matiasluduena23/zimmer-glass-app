@@ -62,21 +62,6 @@ export const ClienteSchema = z.object({
 	detalle: z.string().optional(),
 });
 
-export const PresupuestoSchema = z.object({
-	id: z.string().optional(),
-	clienteID: z
-		.string({
-			required_error: 'Debe ingresar un cliente',
-		})
-		.min(5, { message: 'Debe ingresar un cliente' }),
-	productos: z.array(z.object({})),
-	total: z.coerce.number({
-		required_error: 'Debe ingresar un total',
-		invalid_type_error: 'Ingrese solo numeros',
-	}),
-	observaciones: z.string().optional(),
-});
-
 export const ProductoSchema = z.object({
 	id: z.string().optional(),
 	vidrio1ID: z
@@ -122,7 +107,43 @@ export const HerramientaSchema = z.object({
 		.positive({ message: 'Debe ingresar una cantidad' }),
 });
 
+export const VidrioTableFormat = z.object({
+	vidrioID: z.string(),
+	camaraID: z.string(),
+	vidrio2ID: z.string(),
+	cantidad: z.number(),
+	alto: z.number(),
+	ancho: z.number(),
+	pulido: z.string(),
+});
+
+export const PresupuestoSchema = z.object({
+	id: z.string().optional(),
+	fecha: z.date().optional(),
+	clienteID: z
+		.string({
+			required_error: 'Debe ingresar un cliente',
+		})
+		.min(5, { message: 'Debe ingresar un cliente' }),
+	productos: z
+		.object({
+			vidrio: z.array(VidrioTableFormat).optional(),
+		})
+		.optional(),
+	total: z.coerce.number({
+		required_error: 'Debe ingresar un total',
+		invalid_type_error: 'Ingrese solo numeros',
+	}),
+	observaciones: z.string().optional(),
+	estado: z.string().optional(),
+});
+
 export type Producto = z.infer<typeof ProductoSchema>;
 export type Herramienta = z.infer<typeof HerramientaSchema>;
 export type Cliente = z.infer<typeof ClienteSchema>;
 export type Dato = z.infer<typeof DatoSchema>;
+export type Presupuesto = z.infer<typeof PresupuestoSchema>;
+export type vidrioTableFormat = z.infer<typeof VidrioTableFormat>;
+
+// Type: '{  productos: ({ vidrio: { vidrio: string; camara: string; vidrioDvh: string; cantidad: number; alto: number; ancho: number; total: number; }[]; herramientas?: undefined; } | { ...; })[];  }[]'
+//  is not assignable to type '{  productos?: { herramienta?: { cantidad: number; herramienta: string; id?: string | undefined; }[] | undefined; vidrio?: { ...; }[] | undefined; }[] | undefined; }[]'.
