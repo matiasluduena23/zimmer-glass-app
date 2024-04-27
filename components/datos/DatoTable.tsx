@@ -23,7 +23,7 @@ type DatoTableProps = {
 
 export default function DatoTable({ data, tipo }: DatoTableProps) {
 	return (
-		<Card className="flex flex-col items-center gap-4 p-2">
+		<Card className="flex flex-col items-center gap-4 p-2 max-w-[480px] ">
 			<CardTitle>{tipo}</CardTitle>
 
 			<ScrollArea className="h-[450px] w-[450px] rounded-md border">
@@ -59,14 +59,6 @@ export default function DatoTable({ data, tipo }: DatoTableProps) {
 							</TableRow>
 						))}
 					</TableBody>
-					<TableFooter>
-						<TableRow>
-							<TableCell colSpan={4}>algun calculo</TableCell>
-							<TableCell className="text-right">
-								$2,500.00
-							</TableCell>
-						</TableRow>
-					</TableFooter>
 				</Table>
 			</ScrollArea>
 			<CardFooter>

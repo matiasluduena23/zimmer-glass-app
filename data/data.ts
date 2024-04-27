@@ -1,4 +1,4 @@
-export const vidrios = [
+export const vidriosData = [
 	{
 		id: 'INV001',
 		tipo: 'Vidrio 1',
@@ -43,7 +43,7 @@ export const vidrios = [
 	},
 ];
 
-export const camaras = [
+export const camarasData = [
 	{
 		id: 'INV001',
 		tipo: 'Camara 1',
@@ -88,7 +88,7 @@ export const camaras = [
 	},
 ];
 
-export const herramientas = [
+export const herramientasData = [
 	{
 		id: 'INV001',
 		tipo: 'herramienta 1',
@@ -133,7 +133,7 @@ export const herramientas = [
 	},
 ];
 
-export const clientes = [
+export const clientesData = [
 	{
 		id: '0',
 		nombre: 'Juan Perez',

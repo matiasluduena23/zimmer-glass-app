@@ -1,6 +1,6 @@
 import React from 'react';
 import CreateUpdateCliente from '@/components/clientes/CreateUpdateCliente';
-import { clientes } from '@/data/data';
+import { clientesData } from '@/data/data';
 import ClientesTable from '@/components/clientes/ClientesTable';
 import { Card, CardFooter, CardHeader } from '@/components/ui/card';
 
@@ -13,7 +13,7 @@ export default function page() {
 						Clientes
 					</h2>
 				</CardHeader>
-				<ClientesTable data={clientes} />
+				<ClientesTable data={clientesData} />
 				<CardFooter className="mt-4">
 					<CreateUpdateCliente buttonText="Nuevo" />
 				</CardFooter>

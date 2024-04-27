@@ -9,11 +9,11 @@ import {
 	TableRow,
 } from '@/components/ui/table';
 import { MinusCircleIcon } from '@heroicons/react/24/outline';
-import { Checkbox } from '../ui/checkbox';
 import { Producto } from '@/lib/definitions';
 import { Button } from '../ui/button';
 import { Dispatch, SetStateAction } from 'react';
 import { Card } from '../ui/card';
+import { Separator } from '../ui/separator';
 type ProductTableProps = {
 	setProducts: Dispatch<SetStateAction<Producto[]>>;
 	products: Producto[];
@@ -23,9 +23,8 @@ export default function ProductTable({
 	setProducts,
 	products,
 }: ProductTableProps) {
-	console.log(products);
 	return (
-		<Card>
+		<Card className="max-w-[900px] ">
 			<Table>
 				<TableCaption>Productos agregados</TableCaption>
 				<TableHeader>
@@ -74,13 +73,8 @@ export default function ProductTable({
 						  ))
 						: null}
 				</TableBody>
-				<TableFooter>
-					<TableRow>
-						<TableCell colSpan={7}>Total</TableCell>
-						<TableCell className="text-right">$2,500.00</TableCell>
-					</TableRow>
-				</TableFooter>
 			</Table>
+			<Separator className="my-4" />
 		</Card>
 	);
 }

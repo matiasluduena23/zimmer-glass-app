@@ -16,13 +16,11 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import FormProducto from './FormProducto';
-import ProductTable from '@/components/presupuestos/ProductTable';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { ProductoSchema, Producto } from '@/lib/definitions';
-import { clientes } from '@/data/data';
+import { Producto, PresupuestoSchema } from '@/lib/definitions';
+import { clientesData } from '@/data/data';
 import { Textarea } from '@/components/ui/textarea';
 type FormPresupuestoProps = {
 	setProducts: Dispatch<SetStateAction<Producto[]>>;
@@ -41,31 +39,29 @@ export default function FormPresupuesto({
 		observaciones: '',
 	};
 
-	const form = useForm<z.infer<typeof ProductoSchema>>({
-		resolver: zodResolver(ProductoSchema),
+	const form = useForm<z.infer<typeof PresupuestoSchema>>({
+		resolver: zodResolver(PresupuestoSchema),
 		defaultValues: defaultValues,
 	});
 
-	function onSubmit(values: z.infer<typeof ProductoSchema>) {
+	function onSubmit(values: z.infer<typeof PresupuestoSchema>) {
 		values.id = uuidv4();
 		console.log(values);
 	}
 
 	return (
 		<>
-			<FormProducto setProducts={setProducts} />
-			<ProductTable setProducts={setProducts} products={products} />
 			<Form {...form}>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
 					className="space-y-8"
 				>
-					<div className="grid grid-cols-3 gap-8  ">
+					<div className="grid grid-cols-1 gap-8 max-w-[400px] ">
 						<FormField
 							control={form.control}
-							name="vidrio1ID"
+							name="clienteID"
 							render={({ field }) => (
-								<FormItem>
+								<FormItem className="relative">
 									<FormLabel>Cliente</FormLabel>
 									<Select
 										onValueChange={field.onChange}
@@ -77,25 +73,29 @@ export default function FormPresupuesto({
 											</SelectTrigger>
 										</FormControl>
 										<SelectContent>
-											{clientes
-												? clientes.map((cliente) => (
-														<SelectItem
-															key={cliente.id}
-															value={cliente.id}
-														>
-															{cliente.nombre}
-														</SelectItem>
-												  ))
+											{clientesData
+												? clientesData.map(
+														(cliente) => (
+															<SelectItem
+																key={cliente.id}
+																value={
+																	cliente.id
+																}
+															>
+																{cliente.nombre}
+															</SelectItem>
+														)
+												  )
 												: null}
 										</SelectContent>
 									</Select>
-									<FormMessage />
+									<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 								</FormItem>
 							)}
 						/>
 						<FormField
 							control={form.control}
-							name="ancho"
+							name="observaciones"
 							render={({ field }) => (
 								<FormItem className="relative">
 									<FormLabel>Observaciones</FormLabel>
@@ -106,13 +106,19 @@ export default function FormPresupuesto({
 											{...field}
 										/>
 									</FormControl>
-									<FormMessage className="absolute -bottom-5 left-0" />
+									<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 								</FormItem>
 							)}
 						/>
-						<Button type="submit" className="self-end">
-							Cargar presupuesto
-						</Button>
+						<div className="grid grid-cols-2">
+							<div className="flex flex-col justify-start">
+								<p>total:</p>
+								<p>$ 4000000</p>
+							</div>
+							<Button type="submit" className="self-end">
+								Cargar presupuesto
+							</Button>
+						</div>
 					</div>
 				</form>
 			</Form>

@@ -19,7 +19,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { vidrios, camaras, herramientas } from '@/data/data';
+import { vidriosData, camarasData } from '@/data/data';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -56,16 +56,13 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 
 	return (
 		<Form {...form}>
-			<form
-				onSubmit={form.handleSubmit(onSubmit)}
-				className="space-y-10 my-2 "
-			>
-				<div className="grid grid-cols-3 gap-8  ">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+				<div className="grid grid-cols-4 gap-8  ">
 					<FormField
 						control={form.control}
 						name="vidrio1ID"
 						render={({ field }) => (
-							<FormItem>
+							<FormItem className="max-w-[300px] relative">
 								<FormLabel>Vidrio</FormLabel>
 								<Select
 									onValueChange={field.onChange}
@@ -77,19 +74,19 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
-										{vidrios
-											? vidrios.map((camara) => (
+										{vidriosData
+											? vidriosData.map((vidrio) => (
 													<SelectItem
-														key={camara.id}
-														value={camara.tipo}
+														key={vidrio.id}
+														value={vidrio.tipo}
 													>
-														{camara.tipo}
+														{vidrio.tipo}
 													</SelectItem>
 											  ))
 											: null}
 									</SelectContent>
 								</Select>
-								<FormMessage />
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 							</FormItem>
 						)}
 					/>
@@ -97,7 +94,7 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 						control={form.control}
 						name="camaraID"
 						render={({ field }) => (
-							<FormItem>
+							<FormItem className="max-w-[300px] relative">
 								<FormLabel>Camara</FormLabel>
 								<Select
 									onValueChange={field.onChange}
@@ -105,13 +102,13 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 								>
 									<FormControl>
 										<SelectTrigger>
-											<SelectValue placeholder="Select a verified email to display" />
+											<SelectValue placeholder="Seleccione Camara" />
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
 										<SelectItem value="0">-</SelectItem>
-										{camaras
-											? camaras.map((camara) => (
+										{camarasData
+											? camarasData.map((camara) => (
 													<SelectItem
 														key={camara.id}
 														value={camara.tipo}
@@ -122,7 +119,7 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 											: null}
 									</SelectContent>
 								</Select>
-								<FormMessage />
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 							</FormItem>
 						)}
 					/>
@@ -130,7 +127,7 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 						control={form.control}
 						name="vidrio2ID"
 						render={({ field }) => (
-							<FormItem>
+							<FormItem className="max-w-[300px] relative">
 								<FormLabel>Vidrio 2 DVH</FormLabel>
 								<Select
 									onValueChange={field.onChange}
@@ -138,23 +135,61 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 								>
 									<FormControl>
 										<SelectTrigger>
-											<SelectValue placeholder="Select a verified email to display" />
+											<SelectValue placeholder="Seleccione Vidrio" />
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
-										{vidrios
-											? vidrios.map((camara) => (
+										{vidriosData
+											? vidriosData.map((vidrio) => (
 													<SelectItem
-														key={camara.id}
-														value={camara.tipo}
+														key={vidrio.id}
+														value={vidrio.tipo}
 													>
-														{camara.tipo}
+														{vidrio.tipo}
 													</SelectItem>
 											  ))
 											: null}
 									</SelectContent>
 								</Select>
-								<FormMessage />
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="pulido"
+						render={({ field }) => (
+							<FormItem className="max-w-[300px] relative">
+								<FormLabel>Pulido</FormLabel>
+								<Select
+									onValueChange={field.onChange}
+									defaultValue={field.value}
+								>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue placeholder="Seleccione Pulido" />
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent>
+										<SelectItem value="no">-</SelectItem>
+										<SelectItem value="60">
+											Grano 60
+										</SelectItem>
+										<SelectItem value="80">
+											Grano 80
+										</SelectItem>
+										<SelectItem value="120">
+											Grano 120
+										</SelectItem>
+										<SelectItem value="220">
+											Grano 220
+										</SelectItem>
+										<SelectItem value="400">
+											Grano 400
+										</SelectItem>
+									</SelectContent>
+								</Select>
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 							</FormItem>
 						)}
 					/>
@@ -162,12 +197,12 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 						control={form.control}
 						name="cantidad"
 						render={({ field }) => (
-							<FormItem className="relative">
+							<FormItem className="relative max-w-[300px] ">
 								<FormLabel>Cantidad</FormLabel>
 								<FormControl>
 									<Input placeholder="000" {...field} />
 								</FormControl>
-								<FormMessage className="absolute -bottom-5 left-0" />
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 							</FormItem>
 						)}
 					/>
@@ -175,7 +210,7 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 						control={form.control}
 						name="alto"
 						render={({ field }) => (
-							<FormItem className="relative">
+							<FormItem className="relative max-w-[300px]">
 								<FormLabel>Alto</FormLabel>
 								<FormControl>
 									<Input
@@ -184,7 +219,7 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 										{...field}
 									/>
 								</FormControl>
-								<FormMessage className="absolute -bottom-5 left-0" />
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 							</FormItem>
 						)}
 					/>
@@ -192,71 +227,22 @@ export default function FormProducto({ setProducts }: FormProductoProps) {
 						control={form.control}
 						name="ancho"
 						render={({ field }) => (
-							<FormItem className="relative">
+							<FormItem className="relative max-w-[300px]">
 								<FormLabel>Ancho</FormLabel>
 								<FormControl>
 									<Input
+										className=""
 										type="number"
 										placeholder="000"
 										{...field}
 									/>
 								</FormControl>
-								<FormMessage className="absolute -bottom-5 left-0" />
+								<FormMessage className="absolute -bottom-4 left-0 text-[12px] " />
 							</FormItem>
 						)}
 					/>
 
-					<FormField
-						control={form.control}
-						name="pulido"
-						render={({ field }) => (
-							<FormItem className="space-y-3">
-								<FormLabel>Pulido</FormLabel>
-								<FormControl>
-									<RadioGroup
-										onValueChange={field.onChange}
-										defaultValue={field.value}
-										className="flex items-center gap-4"
-									>
-										<FormItem className="flex items-center space-x-3 space-y-0">
-											<FormControl>
-												<RadioGroupItem value="full" />
-											</FormControl>
-											<FormLabel className="font-normal">
-												Full
-											</FormLabel>
-										</FormItem>
-										<FormItem className="flex items-center space-x-3 space-y-0">
-											<FormControl>
-												<RadioGroupItem value="medio" />
-											</FormControl>
-											<FormLabel className="font-normal">
-												Medio
-											</FormLabel>
-										</FormItem>
-										<FormItem className="flex items-center space-x-3 space-y-0">
-											<FormControl>
-												<RadioGroupItem value="no" />
-											</FormControl>
-											<FormLabel className="font-normal">
-												No
-											</FormLabel>
-										</FormItem>
-									</RadioGroup>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-
-					<Button
-						className="self-end"
-						onClick={handleClick}
-						variant={'secondary'}
-					>
-						Herramientas
-					</Button>
-					<Button className="self-end" type="submit">
+					<Button className="self-end max-w-[300px]" type="submit">
 						Agregar
 					</Button>
 				</div>
