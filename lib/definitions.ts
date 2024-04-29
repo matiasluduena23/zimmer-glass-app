@@ -115,6 +115,14 @@ export const VidrioTableFormat = z.object({
 	alto: z.number(),
 	ancho: z.number(),
 	pulido: z.string(),
+	total: z.number(),
+});
+
+export const HerramientaTableFormat = z.object({
+	herramienta: z.string(),
+	cantidad: z.number(),
+	precio: z.number(),
+	total: z.number(),
 });
 
 export const PresupuestoSchema = z.object({
@@ -125,11 +133,8 @@ export const PresupuestoSchema = z.object({
 			required_error: 'Debe ingresar un cliente',
 		})
 		.min(5, { message: 'Debe ingresar un cliente' }),
-	productos: z
-		.object({
-			vidrio: z.array(VidrioTableFormat).optional(),
-		})
-		.optional(),
+	vidrios: z.array(VidrioTableFormat).optional(),
+	herramientas: z.array(HerramientaTableFormat).optional(),
 	total: z.coerce.number({
 		required_error: 'Debe ingresar un total',
 		invalid_type_error: 'Ingrese solo numeros',
@@ -144,6 +149,4 @@ export type Cliente = z.infer<typeof ClienteSchema>;
 export type Dato = z.infer<typeof DatoSchema>;
 export type Presupuesto = z.infer<typeof PresupuestoSchema>;
 export type vidrioTableFormat = z.infer<typeof VidrioTableFormat>;
-
-// Type: '{  productos: ({ vidrio: { vidrio: string; camara: string; vidrioDvh: string; cantidad: number; alto: number; ancho: number; total: number; }[]; herramientas?: undefined; } | { ...; })[];  }[]'
-//  is not assignable to type '{  productos?: { herramienta?: { cantidad: number; herramienta: string; id?: string | undefined; }[] | undefined; vidrio?: { ...; }[] | undefined; }[] | undefined; }[]'.
+export type HerramientaTableFormat = z.infer<typeof HerramientaTableFormat>;
